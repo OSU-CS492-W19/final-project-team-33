@@ -6,11 +6,8 @@
     <string name="action_location">Show Star Wars location</string>
     <string name="action_settings">Settings</string>
     <string name="share_chooser_title">Pick an app to share this</string>
-
-
-    <string name="pref_cata_key">pref_cata</string>
-    <string name="pref_cata_title">Category</string>
-    <string name="pref_cata_dir">Choose a Category:</string>
-    <string name="pref_cata_default">People</string>
+    <string name="pref_key">pref_cata</string>
+    <string name="pref_title">Category</string>
+    <string name="pref_dir">Choose a Category:</string>
     <string name="pref_default">People</string>
 </resources>

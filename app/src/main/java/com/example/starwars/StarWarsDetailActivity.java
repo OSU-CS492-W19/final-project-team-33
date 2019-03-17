@@ -39,7 +39,7 @@ public class StarWarsDetailActivity extends AppCompatActivity {
 
     private void fillInLayoutText(StarWarsUtils.starwarsItem switem) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String option = sharedPreferences.getString(getString(R.string.pref_cata_key), getString(R.string.pref_cata_default));
+        String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
         if(option.equals("People")) {
             String Name2 = "<b>Character: </b>" + switem.name;
             String CharHeihgt = "<b>Height: </b>" + switem.height;

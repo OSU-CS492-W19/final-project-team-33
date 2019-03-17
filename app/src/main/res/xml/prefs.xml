@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
-        android:key="@string/pref_cata_key"
-        android:title="@string/pref_cata_title"
+        android:key="@string/pref_key"
+        android:title="@string/pref_title"
         android:summary="%s"
-        android:dialogTitle="@string/pref_cata_dir"
+        android:dialogTitle="@string/pref_dir"
         android:entries="@array/category"
         android:entryValues="@array/category2"
-        android:defaultValue="@string/pref_cata_default" />
+        android:defaultValue="@string/pref_default" />
 </PreferenceScreen>

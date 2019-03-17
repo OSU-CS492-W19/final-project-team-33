@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
         settings = PreferenceManager.getDefaultSharedPreferences(this);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String option = sharedPreferences.getString(getString(R.string.pref_cata_key), getString(R.string.pref_default));
+        String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
 
         getSupportActionBar().setElevation(0);
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
 
     public void loadStarWars(){
         SharedPreferences sharedPreferences = android.support.v7.preference.PreferenceManager.getDefaultSharedPreferences(this);
-        String option = sharedPreferences.getString(getString(R.string.pref_cata_key), getString(R.string.pref_default));
+        String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
 
         String StarWarsURL = StarWarsUtils.buildStarWarsURL(option);
         Log.d(TAG, "Built the url for " + StarWarsURL);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
     @Override
     public void onLoadFinished(@NonNull Loader<String> loader, String s) {
         SharedPreferences sharedPreferences = android.support.v7.preference.PreferenceManager.getDefaultSharedPreferences(this);
-        String option = sharedPreferences.getString(getString(R.string.pref_cata_key), getString(R.string.pref_default));
+        String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
 
         Log.d("Finished", "Cached JSON data ");
         mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
