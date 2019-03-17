@@ -21,19 +21,19 @@ public class StarWarsUtils {
 
         public String climate;
         public String terrain;
-        public String Popul;
+        public String Pop;
 
         public String title;
         public String director;
         public String producer;
 
-        public String ShipModel;
-        public String ShipManu;
-        public String ShipCost;
+        public String Model;
+        public String Manufac;
+        public String Cost;
     }
 
     public static String buildStarWarsURL(String option){
-        String CATEGORY = "starships";
+        String CATEGORY = "people";
 
         if(option.equals("People")){
             CATEGORY = "people";
@@ -59,7 +59,6 @@ public class StarWarsUtils {
             ArrayList<starwarsItem> starwarsItemsList = new ArrayList<starwarsItem>();
             for (int i = 0; i< StarWarsList.length(); i++){
                 starwarsItem starwarsItem = new starwarsItem();
-
                 JSONObject StarWarsListElem = StarWarsList.getJSONObject(i);
 
                 if(option.equals("People")) {
@@ -76,16 +75,16 @@ public class StarWarsUtils {
 
                 else if(option.equals("Starships")) {
                     starwarsItem.name = StarWarsListElem.getString("name");
-                    starwarsItem.ShipModel = StarWarsListElem.getString("model");
-                    starwarsItem.ShipManu = StarWarsListElem.getString("manufacturer");
-                    starwarsItem.ShipCost = StarWarsListElem.getString("cost_in_credits");
+                    starwarsItem.Model = StarWarsListElem.getString("model");
+                    starwarsItem.Manufac = StarWarsListElem.getString("manufacturer");
+                    starwarsItem.Cost = StarWarsListElem.getString("cost_in_credits");
                 }
 
                 else if(option.equals("Planets")) {
                     starwarsItem.name = StarWarsListElem.getString("name");
                     starwarsItem.climate = StarWarsListElem.getString("climate");
                     starwarsItem.terrain = StarWarsListElem.getString("terrain");
-                    starwarsItem.Popul = StarWarsListElem.getString("population");
+                    starwarsItem.Pop = StarWarsListElem.getString("population");
                 }
                 starwarsItemsList.add(starwarsItem);
             }
