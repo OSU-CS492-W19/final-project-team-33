@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">STAR WARS</string>
+    <string name="Star_Wars">Star Wars</string>
+    <string name="loading_error_message">Woops.  We couldn\'t load your Star Wars search.  Check your internet connection and try again.</string>
+    <string name="action_share">Share Star Wars</string>
+    <string name="action_location">Show Star Wars location</string>
+    <string name="action_settings">Settings</string>
+    <string name="share_chooser_title">Pick an app to share this Star Wars Search</string>
+
+
+    <string name="pref_cata_key">pref_cata</string>
+    <string name="pref_cata_title">Category</string>
+    <string name="pref_cata_dir">Choose a Category:</string>
+    <string name="pref_cata_default">People</string>
+    <string name="pref_default">Metric</string>
+</resources>
