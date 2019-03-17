@@ -2,10 +2,14 @@ package com.example.starwars;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.text.Html;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.starwars.utils.StarWarsUtils;
@@ -16,6 +20,8 @@ public class StarWarsDetailActivity extends AppCompatActivity {
     private TextView Detail1;
     private TextView Detail2;
     private TextView Detail3;
+
+
 
     private StarWarsUtils.starwarsItem mstarwarsItem;
 
@@ -82,4 +88,33 @@ public class StarWarsDetailActivity extends AppCompatActivity {
             Detail3.setText(Html.fromHtml(shipCost));
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_view_repo:
+                viewRepoOnWeb();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.repo_detail, menu);
+        return true;
+    }
+
+    public void viewRepoOnWeb() {
+        if (mstarwarsItem != null) {
+            String url = "http://www.starwars.com";
+            Intent webIntent = new Intent(Intent.ACTION_VIEW);
+            webIntent.setData(Uri.parse(url));
+            if (webIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(webIntent);
+            }
+        }
+    }
+
 }
