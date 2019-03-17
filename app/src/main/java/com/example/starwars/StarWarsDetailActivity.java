@@ -7,12 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.starwars.utils.StarWarsUtils;
+
+import java.text.DecimalFormat;
 
 public class StarWarsDetailActivity extends AppCompatActivity {
 
@@ -21,15 +22,13 @@ public class StarWarsDetailActivity extends AppCompatActivity {
     private TextView Detail2;
     private TextView Detail3;
 
-
-
     private StarWarsUtils.starwarsItem mstarwarsItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forecast_item_detail);
+        setContentView(R.layout.activity_item_detail);
 
         Name = (TextView) findViewById(R.id.tv_name);
         Detail1 = (TextView) findViewById(R.id.tv_Detail1);
@@ -44,48 +43,49 @@ public class StarWarsDetailActivity extends AppCompatActivity {
     }
 
     private void fillInLayoutText(StarWarsUtils.starwarsItem switem) {
+        DecimalFormat value = new DecimalFormat("#.#");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
         if(option.equals("People")) {
-            String Name2 = "<b>Character: </b>" + switem.name;
-            String CharHeihgt = "<b>Height: </b>" + switem.height;
-            String CharMsas = "<b>Mass: </b>" + switem.mass;
+            String Ppl_name = "<b>Character: </b>" + switem.name;
+            String Ppl_height = "<b>Height: </b>" + value.format(switem.height * 0.0328084) + " feet";
+            String Ppl_mass = "<b>Mass: </b>" + value.format(switem.mass * 2.20462262185) + " lbs";
 
-            Name.setText(Html.fromHtml(Name2));
-            Detail1.setText(Html.fromHtml(CharHeihgt));
-            Detail2.setText(Html.fromHtml(CharMsas));
+            Name.setText(Html.fromHtml(Ppl_name));
+            Detail1.setText(Html.fromHtml(Ppl_height));
+            Detail2.setText(Html.fromHtml(Ppl_mass));
         }
         if (option.equals("Planets")){
-            String Name2 = "<b>Planet: </b>" + switem.name;
-            String Clim = "<b>Climate: </b>" + switem.climate;
-            String Terra = "<b>terrain: </b>" + switem.terrain;
-            String Pop = "<b>Population: </b>" + switem.Pop;
+            String Plan_name = "<b>Planet: </b>" + switem.name;
+            String Plan_climate = "<b>Climate: </b>" + switem.climate;
+            String Plan_terrain = "<b>terrain: </b>" + switem.terrain;
+            String Plan_pop = "<b>Population: </b>" + switem.Pop;
 
-            Name.setText(Html.fromHtml(Name2));
-            Detail1.setText(Html.fromHtml(Clim));
-            Detail2.setText(Html.fromHtml(Terra));
-            Detail3.setText(Html.fromHtml(Pop));
+            Name.setText(Html.fromHtml(Plan_name));
+            Detail1.setText(Html.fromHtml(Plan_climate));
+            Detail2.setText(Html.fromHtml(Plan_terrain));
+            Detail3.setText(Html.fromHtml(Plan_pop));
         }
         if (option.equals("Films")){
-            String Name2 = "<b>Title: </b>" + switem.name;
-            String dir = "<b>Director: </b>" + switem.director;
-            String prod = "<b>Producer: </b>" + switem.producer;
+            String Film_name = "<b>Title: </b>" + switem.name;
+            String Film_direc = "<b>Director: </b>" + switem.director;
+            String Film_prod = "<b>Producer: </b>" + switem.producer;
 
-            Name.setText(Html.fromHtml(Name2));
-            Detail2.setText(Html.fromHtml(dir));
-            Detail3.setText(Html.fromHtml(prod));
+            Name.setText(Html.fromHtml(Film_name));
+            Detail1.setText(Html.fromHtml(Film_direc));
+            Detail2.setText(Html.fromHtml(Film_prod));
 
         }
         if (option.equals("Starships")){
-            String shipName = "<b>Vehicle Name: </b>" + switem.name;
-            String shipModel = "<b>Model: </b>" + switem.Model;
-            String shipManu = "<b>Manufacturer: </b>" + switem.Manufac;
-            String shipCost = "<b>Cost: </b>" + switem.Cost + " Credits";
+            String Ship_name = "<b>Starship: </b>" + switem.name;
+            String Ship_model = "<b>Model: </b>" + switem.Model;
+            String Ship_manu = "<b>Manufacturer: </b>" + switem.Manufac;
+            String Ship_cost = "<b>Cost: </b>" + switem.Cost;
 
-            Name.setText(Html.fromHtml(shipName));
-            Detail1.setText(Html.fromHtml(shipModel));
-            Detail2.setText(Html.fromHtml(shipManu));
-            Detail3.setText(Html.fromHtml(shipCost));
+            Name.setText(Html.fromHtml(Ship_name));
+            Detail1.setText(Html.fromHtml(Ship_model));
+            Detail2.setText(Html.fromHtml(Ship_manu));
+            Detail3.setText(Html.fromHtml(Ship_cost));
         }
     }
 
@@ -116,5 +116,4 @@ public class StarWarsDetailActivity extends AppCompatActivity {
             }
         }
     }
-
 }

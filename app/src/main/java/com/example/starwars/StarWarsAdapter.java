@@ -39,12 +39,10 @@ public class StarWarsAdapter extends RecyclerView.Adapter<StarWarsAdapter.StarWa
         }
     }
 
-
     @Override
     public StarWarsItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
-        View itemView = inflater.inflate(R.layout.forecast_list_item, parent, false);
+        View itemView = inflater.inflate(R.layout.list_item, parent, false);
 
         return new StarWarsItemViewHolder(itemView);
     }
@@ -57,11 +55,10 @@ public class StarWarsAdapter extends RecyclerView.Adapter<StarWarsAdapter.StarWa
     class StarWarsItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mStarWarsNameTV;
 
-
         public StarWarsItemViewHolder(View itemView){
             super(itemView);
 
-            mStarWarsNameTV = (TextView)itemView.findViewById(R.id.tv_forecast_temp_description);
+            mStarWarsNameTV = (TextView)itemView.findViewById(R.id.tv_temp_description);
             itemView.setOnClickListener(this);
         }
 

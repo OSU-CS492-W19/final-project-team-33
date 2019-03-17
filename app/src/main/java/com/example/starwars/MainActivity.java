@@ -33,12 +33,8 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private SharedPreferences settings;
-    private SharedPreferences.OnSharedPreferenceChangeListener listener;
-
-    private ArrayList<StarWarsUtils.starwarsItem> mStarWarsStuff;
-    private static final String SW_URL_KEY = "key";
-    private static final int LOADER_ID = 0;
+    private ArrayList<StarWarsUtils.starwarsItem> mStarWarsItems;
+    private static final String SW_URL_KEY = "0wh37sj2msvc73h";
 
 
     @Override
@@ -46,43 +42,40 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        settings = PreferenceManager.getDefaultSharedPreferences(this);
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
 
         getSupportActionBar().setElevation(0);
 
-        mStarWarsMainTV = findViewById(R.id.tv_forecast_location);
+        mStarWarsMainTV = findViewById(R.id.tv_location);
         mStarWarsMainTV.setText(option);
 
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         mLoadingErrorMessageTV = findViewById(R.id.tv_loading_error_message);
 
-        mStarWarsItemsRV = findViewById(R.id.rv_forecast_items);
+        mStarWarsItemsRV = findViewById(R.id.rv_items);
         starWarsAdapter = new StarWarsAdapter(this);
         mStarWarsItemsRV.setAdapter(starWarsAdapter);
 
         mStarWarsItemsRV.setLayoutManager(new LinearLayoutManager(this ));
         mStarWarsItemsRV.setHasFixedSize(true);
 
-        loadStarWars();
+        loadStarWarsInfo();
     }
 
-    public void loadStarWars(){
+    public void loadStarWarsInfo(){
         SharedPreferences sharedPreferences = android.support.v7.preference.PreferenceManager.getDefaultSharedPreferences(this);
         String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
 
         String StarWarsURL = StarWarsUtils.buildStarWarsURL(option);
-        Log.d(TAG, "Built the url for " + StarWarsURL);
+        Log.d(TAG, "Url created: " + StarWarsURL);
 
         Bundle SWURL = new Bundle();
         SWURL.putString(SW_URL_KEY, StarWarsURL);
         mLoadingIndicatorPB.setVisibility(View.VISIBLE);
 
-        getSupportLoaderManager().restartLoader(LOADER_ID, SWURL, this);
+        android.support.v4.app.LoaderManager.getInstance(this).initLoader(0,SWURL, this).forceLoad();
     }
-
 
     @NonNull
     @Override
@@ -99,13 +92,12 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
         SharedPreferences sharedPreferences = android.support.v7.preference.PreferenceManager.getDefaultSharedPreferences(this);
         String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
 
-        Log.d("Finished", "Cached JSON data ");
         mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
         if (s != null) {
             mLoadingErrorMessageTV.setVisibility(View.INVISIBLE);
             mStarWarsItemsRV.setVisibility(View.VISIBLE);
-            mStarWarsStuff = StarWarsUtils.parseStarWarsJSON(s, option);
-            starWarsAdapter.updateStarWarsItems(mStarWarsStuff);
+            mStarWarsItems = StarWarsUtils.parseStarWarsJSON(s, option);
+            starWarsAdapter.updateStarWarsItems(mStarWarsItems);
         } else {
             mStarWarsItemsRV.setVisibility(View.INVISIBLE);
             mLoadingErrorMessageTV.setVisibility(View.VISIBLE);
