@@ -45,7 +45,7 @@ public class StarWarsDetailActivity extends AppCompatActivity {
 
     private void fillInLayoutText(StarWarsUtils.starwarsItem switem) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String option = sharedPreferences.getString(getString(R.string.pref_cata_key), getString(R.string.pref_cata_default));
+        String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
         if(option.equals("People")) {
             String Name2 = "<b>Character: </b>" + switem.name;
             String CharHeihgt = "<b>Height: </b>" + switem.height;
@@ -59,7 +59,7 @@ public class StarWarsDetailActivity extends AppCompatActivity {
             String Name2 = "<b>Planet: </b>" + switem.name;
             String Clim = "<b>Climate: </b>" + switem.climate;
             String Terra = "<b>terrain: </b>" + switem.terrain;
-            String Pop = "<b>Population: </b>" + switem.Popul;
+            String Pop = "<b>Population: </b>" + switem.Pop;
 
             Name.setText(Html.fromHtml(Name2));
             Detail1.setText(Html.fromHtml(Clim));
@@ -78,9 +78,9 @@ public class StarWarsDetailActivity extends AppCompatActivity {
         }
         if (option.equals("Starships")){
             String shipName = "<b>Vehicle Name: </b>" + switem.name;
-            String shipModel = "<b>Model: </b>" + switem.ShipModel;
-            String shipManu = "<b>Manufacturer: </b>" + switem.ShipManu;
-            String shipCost = "<b>Cost: </b>" + switem.ShipCost + " Credits";
+            String shipModel = "<b>Model: </b>" + switem.Model;
+            String shipManu = "<b>Manufacturer: </b>" + switem.Manufac;
+            String shipCost = "<b>Cost: </b>" + switem.Cost + " Credits";
 
             Name.setText(Html.fromHtml(shipName));
             Detail1.setText(Html.fromHtml(shipModel));

@@ -37,12 +37,8 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
     private SharedPreferences.OnSharedPreferenceChangeListener listener;
 
     private ArrayList<StarWarsUtils.starwarsItem> mStarWarsStuff;
-    private static final String SW_URL_KEY = "urlKey";
+    private static final String SW_URL_KEY = "key";
     private static final int LOADER_ID = 0;
-    private static final int SW_SEARCH_LOADER_ID = 0;
-    ArrayList<StarWarsUtils.starwarsItem> starwarsItems;
-    private static final String LIFECYCLE_EVENTS_TEXT_KEY = "lifecycleEvents";
-    private static final String REPOS_ARRAY_KEY = "WeatherRepos";
 
 
     @Override
@@ -52,15 +48,8 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
 
         settings = PreferenceManager.getDefaultSharedPreferences(this);
 
-        listener = new SharedPreferences.OnSharedPreferenceChangeListener(){
-
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                refreshDisplay();
-            }
-        };
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String option = sharedPreferences.getString(getString(R.string.pref_cata_key), getString(R.string.pref_default));
+        String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
 
         getSupportActionBar().setElevation(0);
 
@@ -74,51 +63,15 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
         starWarsAdapter = new StarWarsAdapter(this);
         mStarWarsItemsRV.setAdapter(starWarsAdapter);
 
-        if(savedInstanceState != null && savedInstanceState.containsKey(LIFECYCLE_EVENTS_TEXT_KEY)){
-            starwarsItems = (ArrayList<StarWarsUtils.starwarsItem>) savedInstanceState.getSerializable(REPOS_ARRAY_KEY);
-            starWarsAdapter.updateStarWarsItems(starwarsItems);
-        }
-
-        getSupportLoaderManager().initLoader(SW_SEARCH_LOADER_ID, null, this);
-
         mStarWarsItemsRV.setLayoutManager(new LinearLayoutManager(this ));
         mStarWarsItemsRV.setHasFixedSize(true);
 
         loadStarWars();
-
-        Log.d("Refresh", "Called Refresh Display");
     }
-
-    public void refreshDisplay(){
-
-        getSupportActionBar().setElevation(0);
-
-        mStarWarsMainTV = findViewById(R.id.tv_forecast_location);
-        mStarWarsMainTV.setText("Characters");
-
-        mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
-        mLoadingErrorMessageTV = findViewById(R.id.tv_loading_error_message);
-
-        mStarWarsItemsRV = findViewById(R.id.rv_forecast_items);
-        starWarsAdapter = new StarWarsAdapter(this);
-        mStarWarsItemsRV.setAdapter(starWarsAdapter);
-
-        getSupportLoaderManager().initLoader(SW_SEARCH_LOADER_ID, null, this);
-
-        mStarWarsItemsRV.setLayoutManager(new LinearLayoutManager(this ));
-        mStarWarsItemsRV.setHasFixedSize(true);
-
-        loadStarWars();
-        getSupportLoaderManager().initLoader(LOADER_ID, null, this);
-
-        Log.d("Refresh", "Called Refresh Display");
-        loadStarWars();
-    }
-
 
     public void loadStarWars(){
         SharedPreferences sharedPreferences = android.support.v7.preference.PreferenceManager.getDefaultSharedPreferences(this);
-        String option = sharedPreferences.getString(getString(R.string.pref_cata_key), getString(R.string.pref_default));
+        String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
 
         String StarWarsURL = StarWarsUtils.buildStarWarsURL(option);
         Log.d(TAG, "Built the url for " + StarWarsURL);
@@ -144,9 +97,9 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
     @Override
     public void onLoadFinished(@NonNull Loader<String> loader, String s) {
         SharedPreferences sharedPreferences = android.support.v7.preference.PreferenceManager.getDefaultSharedPreferences(this);
-        String option = sharedPreferences.getString(getString(R.string.pref_cata_key), getString(R.string.pref_default));
+        String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
 
-        Log.d("Finished", "Cached JSON data loaded");
+        Log.d("Finished", "Cached JSON data ");
         mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
         if (s != null) {
             mLoadingErrorMessageTV.setVisibility(View.INVISIBLE);
