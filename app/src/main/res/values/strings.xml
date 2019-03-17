@@ -6,6 +6,8 @@
     <string name="action_location">Show Star Wars location</string>
     <string name="action_settings">Settings</string>
     <string name="share_chooser_title">Pick an app to share this Star Wars Search</string>
+    <string name="action_view_repo">Take me to Star Wars Universe</string>
+
 
 
     <string name="pref_cata_key">pref_cata</string>
