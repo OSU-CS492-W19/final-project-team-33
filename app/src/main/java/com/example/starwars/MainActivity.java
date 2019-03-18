@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.support.v7.preference.PreferenceManager;
@@ -36,11 +38,18 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
     private ArrayList<StarWarsUtils.starwarsItem> mStarWarsItems;
     private static final String SW_URL_KEY = "0wh37sj2msvc73h";
 
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String option = sharedPreferences.getString(getString(R.string.pref_key), getString(R.string.pref_default));
@@ -124,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements StarWarsAdapter.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(mToggle.onOptionsItemSelected(item)){
+            return true;
+        }
         switch (item.getItemId()) {
             case R.id.action_settings:
                 showPreferences();

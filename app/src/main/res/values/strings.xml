@@ -11,4 +11,6 @@
     <string name="pref_title">Category</string>
     <string name="pref_dir">Choose a Category:</string>
     <string name="pref_default">Metric</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
